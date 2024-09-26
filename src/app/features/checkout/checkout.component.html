@@ -1,0 +1,40 @@
+<div class="checkout-container" *ngIf="cart.length > 0; else emptyCart">
+  <h2>Your cart</h2>
+  <div *ngFor="let item of cart" class="cart-item">
+    <img [src]="item.image" alt="{{ item.name }}" class="cart-item-image" />
+    <div class="cart-item-details">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+      <p>Price: {{ item.price }}</p>
+      <p>Quantity: {{ item.quantity }}</p>
+      <div class="quantity-control">
+        <button
+          (click)="decreaseQuantity(item)"
+          [disabled]="item.quantity <= 1"
+        >
+          -
+        </button>
+        <button
+          (click)="increaseQuantity(item)"
+          [disabled]="getProductStock(item.product_id) <= item.quantity"
+        >
+          +
+        </button>
+      </div>
+    </div>
+    <button class="remove-item" (click)="removeFromCart(item)">Remove</button>
+  </div>
+
+  <div class="total-section">
+    <span>Total: {{ total }}</span>
+    <button class="proceed-to-checkout-btn" (click)="proceedToCheckout()">
+      Proceed to checkout
+    </button>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <div class="empty-cart">
+    <p>Your cart is empty. <a routerLink="/">Go back to shopping.</a></p>
+  </div>
+</ng-template>

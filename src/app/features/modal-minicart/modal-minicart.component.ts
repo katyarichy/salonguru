@@ -50,6 +50,7 @@ export class ModalMiniCartComponent implements OnInit {
   getProductStock(productId: string): number {
     return this.cartService.getProductStock(productId);
   }
+
   goToCheckout(): void {
     this.router.navigate(['/checkout']);
   }

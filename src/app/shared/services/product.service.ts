@@ -16,6 +16,7 @@ export class ProductService {
 
   private productsSubject = new BehaviorSubject<Product[]>([]);
   public products$ = this.productsSubject.asObservable();
+  public products: Product[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -30,6 +31,7 @@ export class ProductService {
     return this.http.get<ProductAPI>(this.apiUrl, { headers }).pipe(
       tap((response: ProductAPI) => {
         this.productsSubject.next(response.products);
+        this.products = response.products;
       })
     );
   }

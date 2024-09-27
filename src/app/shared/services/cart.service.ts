@@ -1,25 +1,24 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ProductService } from '@shared/services/product.service';
 import { Product } from '@model/product';
 import { CartItem } from '@model/cart-item.model';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private products: Product[] = [];
+  private productService = inject(ProductService);
+
+  private document: Document = inject(DOCUMENT);
+  private products: Product[] = this.productService.products;
   private cart: CartItem[] = [];
 
-  constructor(private productService: ProductService) {
-    this.productService.products$.subscribe((products) => {
-      this.products = products;
-    });
-    this.loadCart();
-  }
-
-  private loadCart(): void {
-    const cart = localStorage.getItem('cart');
-    this.cart = cart ? JSON.parse(cart) : [];
+  loadCart(): void {
+    const cart = this.document.defaultView?.localStorage?.getItem('cart');
+    if (cart) {
+      this.cart = cart ? JSON.parse(cart) : [];
+    }
   }
 
   private saveCart(cart: CartItem[]): void {
@@ -35,12 +34,9 @@ export class CartService {
       (cartItem) => cartItem.product_id === product.id
     );
 
-    const stockAvailability =
-      this.products.find((p) => p.id === product.id)?.quantity || 0;
-
-    if (cartItem && cartItem.quantity < stockAvailability) {
+    if (cartItem && cartItem.quantity < product.quantity) {
       cartItem.quantity++;
-    } else {
+    } else if (!cartItem) {
       this.cart.push({ ...product, product_id: product.id, quantity: 1 });
     }
 

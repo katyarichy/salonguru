@@ -1,119 +1,139 @@
-.checkout-container {
+@import "../../../styles.scss";
+
+.checkout {
   max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
+  background-color: $white;
+  border-radius: $border-radius;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: "Poppins", sans-serif;
-}
+  padding: $padding;
+  margin: $padding auto $padding;
+  font-family: $font;
 
-.cart-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+  @media screen and (max-width: 940px) {
+    margin: 0 $padding $padding;
+  }
 
-.cart-item-image {
-  max-width: 120px;
-  border-radius: 8px;
-  margin-right: 20px;
-}
+  &__cart-item {
+    @include flex-container($justify: space-between, $align: center);
+    gap: $padding;
+    padding: $padding 0;
+    &--last {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
 
-.cart-item-details {
-  flex: 1;
-  padding: 0 20px;
-}
+    &:not(&--last) {
+      border-bottom: 1px solid $grey-dark;
+      margin-bottom: 20px;
+    }
 
-.cart-item-details h3 {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 5px;
-}
+    @media screen and (max-width: 768px) {
+      @include flex-container($direction: column, $align: flex-start);
+    }
 
-.cart-item-details p {
-  font-size: 14px;
-  color: #555;
-}
+    &__image {
+      max-width: 120px;
+      border-radius: $border-radius;
+    }
 
-.quantity-control {
-  display: flex;
-  align-items: center;
-}
+    &__details {
+      flex: 1;
+    }
 
-.quantity-control button {
-  padding: 5px 10px;
-  margin-left: 5px;
-  background-color: black;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    &__name {
+      font-size: 18px;
+      color: $black;
+    }
 
-.quantity-control button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
+    &__description,
+    &__price,
+    &__quantity {
+      font-size: 14px;
+      color: $black;
+      margin-top: 5px;
+    }
 
-.remove-item {
-  background-color: #fff;
-  color: #000;
-  border: 2px solid #000;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    &__price,
+    &__quantity {
+      font-weight: bold;
+    }
 
-.remove-item:hover {
-  background-color: black;
-  color: #fff;
-}
+    &__quantity-container {
+      @include flex-container($align: center);
+      gap: 5px;
+      padding-top: 5px;
+    }
 
-.total-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  border-top: 1px solid #ddd;
-  font-size: 20px;
-  font-weight: bold;
-}
+    &__btn-decrease,
+    &__btn-increase {
+      border: none;
+      border-radius: $border-radius-small;
+      background-color: $black-dark;
+      padding: 5px $padding-small;
+      color: $white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
 
-.proceed-to-checkout-btn {
-  padding: 15px 20px;
-  background-color: black;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+      &:hover {
+        background-color: $black;
+      }
 
-.proceed-to-checkout-btn:hover {
-  background-color: #ddd;
+      &:disabled {
+        background-color: $black-light;
+        cursor: not-allowed;
+      }
+    }
+
+    &__btn-remove {
+      border-radius: $border-radius-small;
+      padding: $padding-small;
+      font-size: 14px;
+      color: $black;
+      background-color: $white;
+      border: 1px solid $black;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $grey;
+      }
+    }
+  }
+
+  &__total-section {
+    @include flex-container($justify: space-between, $align: center);
+    background-color: $white;
+    border-top: 1px solid $grey-dark;
+    padding-top: $padding;
+    font-size: 20px;
+    font-weight: bold;
+
+    @media screen and (max-width: 768px) {
+      @include flex-container($direction: column, $align: flex-start);
+      gap: $padding;
+    }
+
+    .proceed-to-checkout-btn {
+      border: none;
+      border-radius: $border-radius-small;
+      background-color: $black-dark;
+      padding: 15px $padding;
+      font-size: 16px;
+      color: $white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $black;
+      }
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
 }
 
 .empty-cart {
   text-align: center;
   font-size: 16px;
-}
-
-.empty-cart a {
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.empty-cart a:hover {
-  text-decoration: underline;
 }

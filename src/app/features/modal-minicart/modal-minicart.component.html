@@ -1,34 +1,52 @@
-<div class="modal-backdrop" (click)="onClose()"></div>
+<div class="modal__backdrop" (click)="onClose()"></div>
+
 <div class="modal">
-  <div class="cart-items">
-    <div *ngFor="let item of cart" class="cart-item">
-      <h3>{{ item.name }}</h3>
-      <div class="buttons-group">
-        <p>Price: {{ item.price }}</p>
-        <p>Quantity: {{ item.quantity }}</p>
+  <div class="modal__cart-items">
+    <div *ngFor="let item of cart" class="modal__cart-item">
+      <h3 class="modal__cart-item__name">{{ item.name }}</h3>
+      <div class="modal__cart-item__container">
+        <p class="modal__cart-item__price">Price: {{ item.price }}</p>
+        <p class="modal__cart-item__quantity">Quantity: {{ item.quantity }}</p>
         <button
+          class="modal__cart-item__btn-decrease"
           (click)="decreaseQuantity(item)"
           [disabled]="item.quantity === 1"
         >
           -
         </button>
         <button
+          class="modal__cart-item__btn-increase"
           (click)="increaseQuantity(item)"
           [disabled]="item.quantity >= getProductStock(item.product_id)"
         >
           +
         </button>
-        <button (click)="removeFromCart(item)">Remove</button>
+        <button
+          class="modal__cart-item__btn-remove"
+          (click)="removeFromCart(item)"
+        >
+          Remove
+        </button>
       </div>
     </div>
   </div>
 
-  <div class="total-section">
+  <div class="modal__total-section">
     <h3>Total: {{ total }}</h3>
   </div>
 
-  <div class="modal-footer">
-    <button (click)="goToCheckout()">Proceed to checkout</button>
-    <button (click)="onClose()">Close</button>
+  <div class="modal__footer">
+    <button
+      class="modal__footer__btn modal__footer__btn--checkout"
+      (click)="goToCheckout()"
+    >
+      Checkout
+    </button>
+    <button
+      class="modal__footer__btn modal__footer__btn--close"
+      (click)="onClose()"
+    >
+      Close
+    </button>
   </div>
 </div>

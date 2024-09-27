@@ -1,20 +1,30 @@
-<div class="checkout-container" *ngIf="cart.length > 0; else emptyCart">
-  <h2>Your cart</h2>
-  <div *ngFor="let item of cart" class="cart-item">
-    <img [src]="item.image" alt="{{ item.name }}" class="cart-item-image" />
-    <div class="cart-item-details">
-      <h3>{{ item.name }}</h3>
-      <p>{{ item.description }}</p>
-      <p>Price: {{ item.price }}</p>
-      <p>Quantity: {{ item.quantity }}</p>
-      <div class="quantity-control">
+<div class="checkout" *ngIf="cart.length > 0; else emptyCart">
+  <h2 class="checkout__title">Your cart</h2>
+  <div
+    *ngFor="let item of cart; let last = last"
+    class="checkout__cart-item"
+    [ngClass]="{ 'checkout__cart-item--last': last }"
+  >
+    <img
+      [src]="item.image"
+      alt="{{ item.name }}"
+      class="checkout__cart-item__image"
+    />
+    <div class="checkout__cart-item__details">
+      <h3 class="checkout__cart-item__name">{{ item.name }}</h3>
+      <p class="checkout__cart-item__description">{{ item.description }}</p>
+      <p class="checkout__cart-item__price">Price: {{ item.price }}</p>
+      <p class="checkout__cart-item__quantity">Quantity: {{ item.quantity }}</p>
+      <div class="checkout__cart-item__quantity-container">
         <button
+          class="checkout__cart-item__btn-decrease"
           (click)="decreaseQuantity(item)"
           [disabled]="item.quantity <= 1"
         >
           -
         </button>
         <button
+          class="checkout__cart-item__btn-increase"
           (click)="increaseQuantity(item)"
           [disabled]="getProductStock(item.product_id) <= item.quantity"
         >
@@ -22,10 +32,15 @@
         </button>
       </div>
     </div>
-    <button class="remove-item" (click)="removeFromCart(item)">Remove</button>
+    <button
+      class="checkout__cart-item__btn-remove"
+      (click)="removeFromCart(item)"
+    >
+      Remove
+    </button>
   </div>
 
-  <div class="total-section">
+  <div class="checkout__total-section">
     <span>Total: {{ total }}</span>
     <button class="proceed-to-checkout-btn" (click)="proceedToCheckout()">
       Proceed to checkout
@@ -35,6 +50,6 @@
 
 <ng-template #emptyCart>
   <div class="empty-cart">
-    <p>Your cart is empty. <a routerLink="/">Go back to shopping.</a></p>
+    <p>Your cart is empty. Go back to shopping.</p>
   </div>
 </ng-template>

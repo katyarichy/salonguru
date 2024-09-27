@@ -1,3 +1,35 @@
+// VARIABLES
+$font: "Poppins", sans-serif;
+
+$black-dark: #000;
+$black: #333;
+$black-light: #777;
+$grey-dark: #ddd;
+$grey: #efefef;
+$white: #fff;
+$primary: #ee866c;
+
+$border-radius: 10px;
+$border-radius-small: 5px;
+$padding: 20px;
+$padding-small: 10px;
+
+// MIXINS
+@mixin flex-container(
+  $display: flex,
+  $direction: null,
+  $wrap: null,
+  $justify: null,
+  $align: null
+) {
+  display: $display;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// RESET
 * {
   margin: 0;
   padding: 0;
@@ -7,13 +39,14 @@
 html,
 body {
   height: 100%;
-  font-family: "Poppins", sans-serif;
+  font-family: $font;
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
+  background-color: $grey;
 }
 
 ul,

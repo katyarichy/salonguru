@@ -1,118 +1,135 @@
-.modal-backdrop {
+@import "../../../styles.scss";
+
+.modal__backdrop {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 999;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
 }
 
 .modal {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 320px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  top: $padding;
+  right: $padding;
   z-index: 1000;
-  font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  max-height: 90vh;
-}
+  @include flex-container($direction: column);
+  width: 320px;
+  max-height: 70vh;
+  background-color: $white;
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: $font;
 
-.cart-items {
-  overflow-y: auto;
-  flex-grow: 1;
-  padding: 20px;
-}
-
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-}
-
-.cart-item h3 {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-}
-
-.buttons-group {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.buttons-group p {
-  margin: 0;
-  font-size: 14px;
-  color: #555;
-}
-
-.buttons-group button {
-  padding: 5px 10px;
-  margin-top: 5px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #333;
+  @media screen and (max-width: 768px) {
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    bottom: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    max-height: unset;
+    border-radius: 10px;
   }
 
-  &:disabled {
-    background-color: #bbb;
-    cursor: not-allowed;
+  &__cart-items {
+    overflow-y: auto;
+    padding: $padding;
   }
-}
 
-.total-section {
-  padding: 20px;
-  font-weight: bold;
-  font-size: 16px;
-  display: flex;
-  justify-content: space-between;
-}
+  &__cart-item {
+    @include flex-container($justify: space-between, $align: center);
+    gap: $padding;
+    border-bottom: 1px solid $grey-dark;
+    padding-bottom: $padding-small;
+    margin-bottom: $padding-small;
 
-.modal-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ddd;
-  position: sticky;
-  bottom: 0;
-}
+    &__name {
+      font-size: 16px;
+      font-weight: bold;
+      color: $black;
+    }
 
-.modal-footer button {
-  padding: 10px;
-  font-size: 14px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 48%;
-  transition: background-color 0.3s ease;
+    &__container {
+      @include flex-container($direction: column, $justify: space-between);
+      gap: 5px;
+    }
 
-  &:hover {
-    background-color: #333;
+    &__price,
+    &__quantity {
+      font-size: 14px;
+      color: $black;
+      margin: 0;
+    }
+
+    &__btn-decrease,
+    &__btn-increase,
+    &__btn-remove {
+      background-color: $black-dark;
+      border-radius: $border-radius-small;
+      padding: 5px $padding-small;
+      font-size: 14px;
+      color: $white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $black;
+      }
+
+      &:disabled {
+        background-color: $black-light;
+        cursor: not-allowed;
+      }
+    }
   }
-}
 
-.modal-footer button:last-child {
-  color: #333;
-  background-color: #fff;
-  border: 1px solid #333;
+  &__total-section {
+    @include flex-container($justify: space-between);
+    border-top: 1px solid $grey-dark;
+    background-color: $grey;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  &__footer {
+    @include flex-container($justify: space-between);
+    gap: $padding;
+    background-color: $grey;
+    padding: 0 $padding $padding;
+    position: sticky;
+    bottom: 0;
+
+    &__btn {
+      flex: 1;
+      border: none;
+      border-radius: 5px;
+      padding: $padding-small;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+
+      &--checkout {
+        background-color: $primary;
+        color: $white;
+
+        &:hover {
+          background-color: $black;
+        }
+      }
+
+      &--close {
+        color: $black;
+        background-color: $grey;
+        border: 1px solid $black;
+
+        &:hover {
+          background-color: $white;
+        }
+      }
+    }
+  }
 }

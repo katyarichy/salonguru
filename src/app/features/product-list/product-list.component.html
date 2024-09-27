@@ -1,17 +1,22 @@
-<div class="product-list-container" *ngIf="products$ | async as products">
-  <div class="product-item" *ngFor="let product of products">
-    <img [src]="product.image" alt="{{ product.name }}" class="product-image" />
-    <h3 class="product-name">{{ product.name }}</h3>
-    <p class="product-description">{{ product.description }}</p>
-    <p class="product-stock">Stock: {{ product.quantity }}</p>
-    <p class="product-price">Price: ${{ product.price }}</p>
-    <button
-      class="btn-add-cart"
-      (click)="addToCart(product)"
-      [disabled]="product.quantity === 0"
-    >
-      Add to cart
-    </button>
+<div class="product-list" *ngIf="products$ | async as products">
+  <div class="product-list__item" *ngFor="let product of products">
+    <img
+      [src]="product.image"
+      alt="{{ product.name }}"
+      class="product-list__item__image"
+    />
+    <div class="product-list__item__info">
+      <h3 class="product-list__item__name">{{ product.name }}</h3>
+      <p class="product-list__item__description">{{ product.description }}</p>
+      <p class="product-list__item__price">Price: ${{ product.price }}</p>
+      <button
+        class="product-list__item__btn-add-cart"
+        (click)="addToCart(product)"
+        [disabled]="product.quantity === 0"
+      >
+        Add to cart
+      </button>
+    </div>
   </div>
 </div>
 

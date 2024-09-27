@@ -1,62 +1,65 @@
-.product-list-container {
+@import "../../../styles.scss";
+
+.product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  font-family: "Poppins", sans-serif;
-}
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: $padding;
+  padding: $padding;
+  font-family: $font;
 
-.product-item {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
+  &__item {
+    @include flex-container($direction: column);
+    border-radius: $border-radius;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: $white;
 
-.product-image {
-  max-width: 100%;
-  border-radius: 10px 10px 0 0;
-  margin-bottom: 10px;
-}
+    &__image {
+      max-width: 100%;
+      border-radius: $border-radius $border-radius 0 0;
+    }
 
-.product-name {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
+    &__info {
+      @include flex-container($direction: column);
+      height: 100%;
+      padding: $padding;
+    }
 
-.product-description,
-.product-stock {
-  color: #777;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
+    &__name {
+      font-size: 18px;
+      font-weight: 600;
+      color: $black;
+      margin-bottom: $padding;
+    }
 
-.product-price {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
+    &__description {
+      font-size: 14px;
+      color: $black-light;
+    }
 
-.btn-add-cart {
-  padding: 10px 20px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: #333;
-  }
-  &:disabled {
-    background-color: #bbb;
-    cursor: not-allowed;
+    &__price {
+      font-size: 16px;
+      color: #333;
+      margin: $padding-small 0;
+      font-weight: bold;
+    }
+
+    &__btn-add-cart {
+      margin-top: auto;
+      background-color: $black-dark;
+      border-radius: $border-radius-small;
+      padding: $padding-small;
+      font-size: 14px;
+      color: $white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: $black;
+      }
+      &:disabled {
+        background-color: $black;
+        cursor: not-allowed;
+      }
+    }
   }
 }

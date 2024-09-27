@@ -41,7 +41,7 @@
   </div>
 
   <div class="checkout__total-section">
-    <span>Total: {{ total }}</span>
+    <span>Total: {{ total | currency : "USD" : "symbol" : "1.2-2" }}</span>
     <button class="proceed-to-checkout-btn" (click)="proceedToCheckout()">
       Proceed to checkout
     </button>

@@ -5,7 +5,9 @@
     <div *ngFor="let item of cart" class="modal__cart-item">
       <h3 class="modal__cart-item__name">{{ item.name }}</h3>
       <div class="modal__cart-item__container">
-        <p class="modal__cart-item__price">Price: {{ item.price }}</p>
+        <p class="modal__cart-item__price">
+          Price: {{ item.price | currency : "USD" : "symbol" : "1.2-2" }}
+        </p>
         <p class="modal__cart-item__quantity">Quantity: {{ item.quantity }}</p>
         <button
           class="modal__cart-item__btn-decrease"
@@ -32,7 +34,7 @@
   </div>
 
   <div class="modal__total-section">
-    <h3>Total: {{ total }}</h3>
+    <h3>Total: {{ total | currency : "USD" : "symbol" : "1.2-2" }}</h3>
   </div>
 
   <div class="modal__footer">

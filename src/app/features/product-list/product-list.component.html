@@ -8,7 +8,9 @@
     <div class="product-list__item__info">
       <h3 class="product-list__item__name">{{ product.name }}</h3>
       <p class="product-list__item__description">{{ product.description }}</p>
-      <p class="product-list__item__price">Price: ${{ product.price }}</p>
+      <p class="product-list__item__price">
+        Price: {{ product.price | currency : "USD" : "symbol" : "1.2-2" }}
+      </p>
       <button
         class="product-list__item__btn-add-cart"
         (click)="addToCart(product)"

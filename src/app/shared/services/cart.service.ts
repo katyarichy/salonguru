@@ -14,6 +14,13 @@ export class CartService {
   private products: Product[] = this.productService.products;
   private cart: CartItem[] = [];
 
+  constructor() {
+    this.productService.products$.subscribe((products) => {
+      this.products = products;
+    });
+    this.loadCart();
+  }
+
   loadCart(): void {
     const cart = this.document.defaultView?.localStorage?.getItem('cart');
     if (cart) {

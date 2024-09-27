@@ -2,7 +2,11 @@
 
 <div class="modal">
   <div class="modal__cart-items">
-    <div *ngFor="let item of cart" class="modal__cart-item">
+    <div
+      *ngFor="let item of cart; let last = last"
+      class="modal__cart-item"
+      [ngClass]="{ 'modal__cart-item--last': last }"
+    >
       <h3 class="modal__cart-item__name">{{ item.name }}</h3>
       <div class="modal__cart-item__container">
         <p class="modal__cart-item__price">
@@ -33,22 +37,24 @@
     </div>
   </div>
 
-  <div class="modal__total-section">
-    <h3>Total: {{ total | currency : "USD" : "symbol" : "1.2-2" }}</h3>
-  </div>
-
   <div class="modal__footer">
-    <button
-      class="modal__footer__btn modal__footer__btn--checkout"
-      (click)="goToCheckout()"
-    >
-      Checkout
-    </button>
-    <button
-      class="modal__footer__btn modal__footer__btn--close"
-      (click)="onClose()"
-    >
-      Close
-    </button>
+    <div class="modal__footer__total-section">
+      <h3>Total: {{ total | currency : "USD" : "symbol" : "1.2-2" }}</h3>
+    </div>
+
+    <div class="modal__footer__btn-container">
+      <button
+        class="modal__footer__btn-container__btn modal__footer__btn-container__btn--checkout"
+        (click)="goToCheckout()"
+      >
+        Checkout
+      </button>
+      <button
+        class="modal__footer__btn-container__btn modal__footer__btn-container__btn--close"
+        (click)="onClose()"
+      >
+        Close
+      </button>
+    </div>
   </div>
 </div>

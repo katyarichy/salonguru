@@ -47,6 +47,16 @@
     padding-bottom: $padding-small;
     margin-bottom: $padding-small;
 
+    &--last {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    &:not(&--last) {
+      border-bottom: 1px solid $grey-dark;
+      margin-bottom: $padding;
+    }
+
     &__name {
       font-size: 16px;
       font-weight: bold;
@@ -87,47 +97,51 @@
     }
   }
 
-  &__total-section {
-    @include flex-container($justify: space-between);
-    border-top: 1px solid $grey-dark;
-    background-color: $grey;
-    padding: 20px;
-    font-weight: bold;
-    font-size: 16px;
-  }
-
   &__footer {
-    @include flex-container($justify: space-between);
-    gap: $padding;
-    background-color: $grey;
-    padding: 0 $padding $padding;
-    position: sticky;
-    bottom: 0;
+    margin-top: auto;
 
-    &__btn {
-      flex: 1;
-      border: none;
-      border-radius: 5px;
-      padding: $padding-small;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
+    &__total-section {
+      @include flex-container($justify: space-between);
+      border-top: 1px solid $grey-dark;
+      background-color: $grey;
+      padding: 20px;
+      font-weight: bold;
+      font-size: 16px;
+    }
 
-      &--checkout {
-        background-color: $primary;
-        color: $white;
+    &__btn-container {
+      @include flex-container($justify: space-between);
+      gap: $padding;
+      background-color: $grey;
+      padding: 0 $padding $padding;
+      position: sticky;
+      bottom: 0;
 
-        &:hover {
-          background-color: $black;
+      &__btn {
+        flex: 1;
+        border: none;
+        border-radius: 5px;
+        padding: $padding-small;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+
+        &--checkout {
+          background-color: $primary;
+          color: $white;
+
+          &:hover {
+            background-color: $black;
+          }
         }
-      }
 
-      &--close {
-        color: $black;
-        background-color: $grey;
-        border: 1px solid $black;
+        &--close {
+          color: $black;
+          background-color: $grey;
+          border: 1px solid $black;
 
-        &:hover {
-          background-color: $white;
+          &:hover {
+            background-color: $white;
+          }
         }
       }
     }

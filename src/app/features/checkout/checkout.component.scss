@@ -18,13 +18,13 @@
     gap: $padding;
     padding: $padding 0;
     &--last {
-      margin-bottom: 0;
       border-bottom: none;
+      margin-bottom: 0;
     }
 
     &:not(&--last) {
       border-bottom: 1px solid $grey-dark;
-      margin-bottom: 20px;
+      margin-bottom: $padding;
     }
 
     @media screen and (max-width: 768px) {
